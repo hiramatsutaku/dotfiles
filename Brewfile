@@ -19,6 +19,7 @@ cask 'atom'
 cask 'dropbox'
 cask 'google-chrome'
 cask 'hammerspoon'
+cask 'iterm2'
 
 # mas
 #
