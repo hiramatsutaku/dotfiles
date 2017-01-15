@@ -1,0 +1,17 @@
+[user]
+	name  = hiramatsutaku
+	email = hiramatsutaku@gmail.com
+
+[core]
+	editor = vi
+
+[color]
+    ui = auto
+
+[alias]
+    br = branch
+    cm = commit -m
+    co = checkout
+    new = checkout -b
+    st = status
+    lo = log --oneline
