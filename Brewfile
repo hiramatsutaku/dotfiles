@@ -7,6 +7,7 @@ tap 'homebrew/core'
 tap 'homebrew/bundle'
 
 # brew
+brew 'gibo'
 brew 'mas'
 brew 'jq'
 brew 'zsh'
