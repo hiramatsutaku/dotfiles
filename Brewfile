@@ -10,6 +10,7 @@ tap 'homebrew/bundle'
 brew 'gibo'
 brew 'mas'
 brew 'jq'
+brew 'rbenv'
 brew 'zsh'
 
 # cask
