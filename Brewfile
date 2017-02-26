@@ -9,6 +9,8 @@ tap 'homebrew/bundle'
 # brew
 brew 'gibo'
 brew 'jq'
+brew 'libxml2'
+brew 'libxslt'
 brew 'nkf'
 brew 'node'
 brew 'mas'
