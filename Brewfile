@@ -8,9 +8,14 @@ tap 'homebrew/bundle'
 
 # brew
 brew 'gibo'
-brew 'mas'
 brew 'jq'
+brew 'nkf'
+brew 'node'
+brew 'mas'
 brew 'rbenv'
+brew 'redis'
+brew 'the_silver_searcher'
+brew 'tree'
 brew 'zsh'
 
 # cask
@@ -27,5 +32,7 @@ cask 'iterm2'
 #
 # $ mas list
 #
+mas 'LINE', id: 539883307
+mas 'Skitch', id: 803453959
 mas 'Slack', id: 803453959
 mas 'Xcode', id: 497799835
