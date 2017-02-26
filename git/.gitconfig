@@ -15,3 +15,6 @@
     new = checkout -b
     st = status
     lo = log --oneline
+
+[core]
+    excludesfile = ~/.gitignore_global
