@@ -8,6 +8,7 @@ tap 'homebrew/bundle'
 
 # brew
 brew 'gibo'
+brew 'imagemagick'
 brew 'jq'
 brew 'libxml2'
 brew 'libxslt'
@@ -18,6 +19,8 @@ brew 'rbenv'
 brew 'redis'
 brew 'the_silver_searcher'
 brew 'tree'
+brew 'yarn'
+brew 'watchman'
 brew 'zsh'
 
 # cask
