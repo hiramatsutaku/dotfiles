@@ -8,19 +8,20 @@ tap 'homebrew/bundle'
 
 # brew
 brew 'gibo'
-brew 'imagemagick'
 brew 'jq'
 brew 'libxml2'
 brew 'libxslt'
 brew 'nkf'
 brew 'node'
 brew 'mas'
+brew 'packer'
 brew 'rbenv'
 brew 'redis'
 brew 'the_silver_searcher'
 brew 'tree'
 brew 'yarn'
 brew 'watchman'
+brew 'wget'
 brew 'zsh'
 
 # cask
