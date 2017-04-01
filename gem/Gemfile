@@ -4,4 +4,8 @@ gem 'cheatset'
 
 # Ruby static code analyzer
 # TODO: 0.48.0 is broken (ref: https://github.com/bbatsov/rubocop/pull/4190)
-gem 'rubocop', '0.47.0', require: false
+gem 'rubocop', '0.47.0'
+
+group :workaround do
+    gem 'rainbow', '~>2.0', '!=2.2.1'
+end
