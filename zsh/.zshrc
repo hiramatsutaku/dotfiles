@@ -69,12 +69,31 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
+# cdr
+autoload -Uz is-at-least
+if is-at-least 4.3.11
+then
+  autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+  add-zsh-hook chpwd chpwd_recent_dirs
+  zstyle ':chpwd:*' recent-dirs-max 1000
+  zstyle ':chpwd:*' recent-dirs-default yes
+  zstyle ':completion:*' recent-dirs-insert both
+fi
+
 
 #========================
 # rbenv
 #========================
 eval "$(rbenv init -)"
 
+
+#========================
+# peco
+#========================
+# load peco sources
+for f (~/.zsh/peco-sources/*) source "${f}"
+bindkey '^r' peco-select-history
+bindkey '^@' peco-cdr
 
 #========================
 # alias
