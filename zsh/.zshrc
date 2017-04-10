@@ -92,8 +92,10 @@ eval "$(rbenv init -)"
 #========================
 # load peco sources
 for f (~/.zsh/peco-sources/*) source "${f}"
-bindkey '^r' peco-select-history
 bindkey '^@' peco-cdr
+bindkey '^]' peco-github-src
+bindkey '^r' peco-select-history
+
 
 #========================
 # alias

@@ -18,3 +18,9 @@
 
 [core]
   excludesfile = ~/.gitignore_global
+
+[ghq]
+	root = /Users/hirataku/src
+
+[include]
+    path = .gitconfig.local

@@ -7,6 +7,7 @@ tap 'homebrew/core'
 tap 'homebrew/bundle'
 
 # brew
+brew 'ghq'
 brew 'gibo'
 brew 'jq'
 brew 'libxml2'

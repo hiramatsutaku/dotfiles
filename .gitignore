@@ -1,3 +1,6 @@
 ## bundle
 gem/.bundle
 gem/vendor/bundle
+
+## local file
+.gitconfig.local
