@@ -50,7 +50,7 @@ function prompt-git-current-branch {
 
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
-PROMPT='`prompt-git-current-branch`%F{white}%F{magenta}%B%n%b%f@%F{yellow}%U%m%u%f:%F{green}%d%f%# '
+PROMPT='`prompt-git-current-branch`%F{white}%F{magenta}%B%n%b%f@%F{yellow}%U%m%u%f:%F{green}%(3~,%-1~/.../%1~,%~)%f%# '
 PROMPT2="%_%% "
 SPROMPT="%r is correct? [n,y,a,e]: "
 RPROMPT=""
