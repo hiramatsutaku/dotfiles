@@ -2,6 +2,10 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.3.0)
+    aws-sdk-core (2.9.9)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sigv4 (1.0.0)
     cheatset (1.3.4)
       haml
       plist
@@ -12,13 +16,24 @@ GEM
       thor
       unindent
     crass (1.0.2)
+    diffy (3.2.0)
     haml (4.0.7)
       tilt
+    hashie (3.5.5)
+    jmespath (1.3.1)
+    miam (0.2.3)
+      aws-sdk-core (>= 2.0.42)
+      diffy
+      hashie
+      parallel
+      ruby-progressbar
+      term-ansicolor
     mini_portile2 (2.1.0)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     nokogumbo (1.4.10)
       nokogiri
+    parallel (1.11.1)
     parser (2.4.0.0)
       ast (~> 2.2)
     plist (3.2.0)
@@ -38,8 +53,11 @@ GEM
       nokogiri (>= 1.4.4)
       nokogumbo (~> 1.4.1)
     sqlite3 (1.3.13)
+    term-ansicolor (1.6.0)
+      tins (~> 1.0)
     thor (0.19.4)
     tilt (2.0.6)
+    tins (1.13.2)
     unicode-display_width (1.1.3)
     unindent (1.0)
 
@@ -48,6 +66,7 @@ PLATFORMS
 
 DEPENDENCIES
   cheatset
+  miam
   rainbow (~> 2.0, != 2.2.1)
   rubocop (= 0.47.0)
 
