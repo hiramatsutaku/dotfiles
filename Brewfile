@@ -26,9 +26,9 @@ brew 'the_silver_searcher'
 brew 'tig'
 brew 'tmux'
 brew 'tree'
-brew 'yarn'
 brew 'watchman'
 brew 'wget'
+brew 'yarn'
 brew 'zsh'
 
 # cask
