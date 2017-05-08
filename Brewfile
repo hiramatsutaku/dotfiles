@@ -9,6 +9,7 @@ tap 'homebrew/bundle'
 # brew
 brew 'ghq'
 brew 'gibo'
+brew 'go'
 brew 'graphviz'
 brew 'jq'
 brew 'libxml2'
