@@ -15,7 +15,6 @@ brew 'jq'
 brew 'libxml2'
 brew 'libxslt'
 brew 'nkf'
-brew 'node'
 brew 'mas'
 brew 'packer'
 brew 'peco'
@@ -41,6 +40,7 @@ cask 'dropbox'
 cask 'google-chrome'
 cask 'hammerspoon'
 cask 'iterm2'
+cask 'reactotron'
 
 # mas
 #
