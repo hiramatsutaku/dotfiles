@@ -41,6 +41,7 @@ cask 'google-chrome'
 cask 'hammerspoon'
 cask 'iterm2'
 cask 'reactotron'
+cask 'react-native-debugger'
 
 # mas
 #
