@@ -47,6 +47,7 @@ cask 'react-native-debugger'
 #
 # $ mas list
 #
+mas 'Bear', id: 1091189122
 mas 'LINE', id: 539883307
 mas 'Skitch', id: 803453959
 mas 'Slack', id: 803453959
