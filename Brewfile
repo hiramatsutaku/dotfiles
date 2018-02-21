@@ -7,6 +7,7 @@ tap 'homebrew/core'
 tap 'homebrew/bundle'
 
 # brew
+brew 'boost'
 brew 'ghq'
 brew 'gibo'
 brew 'go'
