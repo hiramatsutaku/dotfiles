@@ -7,20 +7,16 @@ tap 'homebrew/core'
 tap 'homebrew/bundle'
 
 # brew
-brew 'boost'
+brew 'direnv'
 brew 'ghq'
 brew 'gibo'
 brew 'go'
-brew 'graphviz'
 brew 'jq'
 brew 'libxml2'
 brew 'libxslt'
 brew 'nkf'
 brew 'mas'
-brew 'packer'
 brew 'peco'
-brew 'python'
-brew 'rbenv'
 brew 'redis'
 brew 'terraform'
 brew 'the_silver_searcher'
@@ -36,13 +32,10 @@ brew 'zsh'
 #
 # $ brew cask list
 #
-cask 'atom'
 cask 'dropbox'
 cask 'google-chrome'
-cask 'hammerspoon'
 cask 'iterm2'
-cask 'reactotron'
-cask 'react-native-debugger'
+cask 'karabiner-elements'
 
 # mas
 #
