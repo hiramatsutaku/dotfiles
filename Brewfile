@@ -2,7 +2,6 @@
 #
 # $ brew tap
 #
-tap 'caskroom/cask'
 tap 'homebrew/core'
 tap 'homebrew/bundle'
 
