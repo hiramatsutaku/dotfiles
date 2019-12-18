@@ -4,3 +4,6 @@ gem/vendor/bundle
 
 ## local file
 .gitconfig.local
+
+## Brewfile
+Brewfile.lock.json
