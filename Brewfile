@@ -35,6 +35,8 @@ cask 'dropbox'
 cask 'google-chrome'
 cask 'iterm2'
 cask 'karabiner-elements'
+cask 'visual-studio-code'
+cask 'clipy'
 
 # mas
 #
