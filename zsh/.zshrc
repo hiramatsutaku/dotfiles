@@ -106,9 +106,5 @@ alias ls="ls -al"
 # ローカルの設定を読み込む
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/hirataku/.nvm/versions/node/v8.0.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/hirataku/.nvm/versions/node/v8.0.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/hirataku/.nvm/versions/node/v8.0.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/hirataku/.nvm/versions/node/v8.0.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+# direnv
+eval "$(direnv hook zsh)"
