@@ -17,6 +17,7 @@ brew 'libxml2'
 brew 'libxslt'
 brew 'nkf'
 brew 'mas'
+brew 'openapi-generator'
 brew 'peco'
 brew 'postgresql'
 brew 'redis'
@@ -41,6 +42,7 @@ cask 'karabiner-elements'
 cask 'visual-studio-code'
 cask 'clipy'
 cask '1password'
+cask 'adoptopenjdk'
 
 # mas
 #
