@@ -102,3 +102,6 @@ alias ls="ls -al"
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# anyenv
+eval "$(anyenv init -)"
