@@ -6,6 +6,7 @@ tap 'homebrew/core'
 tap 'homebrew/bundle'
 
 # brew
+brew 'anyenv'
 brew 'direnv'
 brew 'ghq'
 brew 'gibo'
