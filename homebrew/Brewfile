@@ -45,6 +45,7 @@ cask 'clipy'
 cask '1password'
 cask 'adoptopenjdk'
 cask 'alfred'
+cask 'kindle'
 
 # mas
 #
