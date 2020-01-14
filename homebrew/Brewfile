@@ -46,6 +46,7 @@ cask '1password'
 cask 'adoptopenjdk'
 cask 'alfred'
 cask 'kindle'
+cask 'docker'
 
 # mas
 #
