@@ -8,6 +8,7 @@ tap 'homebrew/bundle'
 # brew
 brew 'anyenv'
 brew 'circleci'
+brew 'clisp'
 brew 'direnv'
 brew 'ghq'
 brew 'gibo'
