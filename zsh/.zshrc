@@ -94,7 +94,7 @@ bindkey '^r' peco-select-history
 #========================
 # alias
 #========================
-alias ls="ls -al"
+alias ls="lsd -al"
 alias cat="bat"
 
 

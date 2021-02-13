@@ -18,6 +18,7 @@ brew 'hub'
 brew 'jq'
 brew 'libxml2'
 brew 'libxslt'
+brew 'lsd'
 brew 'nkf'
 brew 'mas'
 brew 'openapi-generator'
@@ -45,6 +46,7 @@ cask '1password'
 cask 'alfred'
 cask 'kindle'
 cask 'docker'
+cask 'font-hack-nerd-font' # 事前に brew tap homebrew/cask-fonts が必要
 
 # mas
 #
