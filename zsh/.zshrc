@@ -105,3 +105,6 @@ eval "$(direnv hook zsh)"
 
 # anyenv
 eval "$(anyenv init -)"
+
+# starship
+eval "$(starship init zsh)"
