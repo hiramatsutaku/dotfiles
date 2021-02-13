@@ -1,0 +1,100 @@
+add_newline = false
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$git_branch\
+$directory\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$line_break\
+$lua\
+$jobs\
+$battery\
+$time\
+$status\
+$character"""
+
+[username]
+style_user = "white bold"
+style_root = "black bold"
+format = "[$user]($style) "
+
+[aws]
+disabled = true
+
+[directory]
+truncation_symbol = "…/"
+
+[git_branch]
+format = '[\($symbol$branch\)]($style) '
+symbol = ""
+truncation_symbol = ""
+
+[git_commit]
+tag_symbol = "🔖 "
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[🍒 PICKING](bold red)"
+
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+
+[nodejs]
+disabled = true
+
+[python]
+format = '[${symbol}(${version} )(\($virtualenv\))]($style) '
+pyenv_version_name = true
+
+[terraform]
+format = "[$symbol]($style) "
+
+[time]
+disabled = false
+format = '[\[$time\]]($style) '
+time_format = "%T"
+utc_time_offset = "+9"
