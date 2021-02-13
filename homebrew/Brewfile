@@ -10,6 +10,7 @@ brew 'anyenv'
 brew 'bat'
 brew 'circleci'
 brew 'clisp'
+brew 'csview' # 事前に brew tap wfxr/csview が必要
 brew 'direnv'
 brew 'ghq'
 brew 'gibo'
