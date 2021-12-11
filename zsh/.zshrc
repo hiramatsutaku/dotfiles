@@ -101,6 +101,10 @@ alias cat="bat"
 # ローカルの設定を読み込む
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
+# MEMO: homebrew の設定は .zshrc.local に置いた
+# # homebrew
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # direnv
 eval "$(direnv hook zsh)"
 
