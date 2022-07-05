@@ -87,6 +87,7 @@ fi
 # load peco sources
 for f (~/.zsh/peco-sources/*) source "${f}"
 bindkey '^@' peco-cdr
+bindkey '^[' peco-git-checkout
 bindkey '^]' peco-github-src
 bindkey '^r' peco-select-history
 
@@ -97,6 +98,9 @@ bindkey '^r' peco-select-history
 alias ls="lsd -al"
 alias cat="bat"
 
+# GitHub
+# 現在のブランチの PR もしくは PR 作成画面をブラウザで開く
+alias pr="gh pr view -w || gh pr create -w"
 
 # ローカルの設定を読み込む
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

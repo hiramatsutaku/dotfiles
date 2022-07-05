@@ -1,0 +1,5 @@
+function peco-git-checkout {
+  git branch | peco | xargs git checkout
+}
+zle -N peco-git-checkout
+bindkey '^[' peco-git-checkout
