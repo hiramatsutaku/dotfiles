@@ -97,6 +97,8 @@ bindkey '^r' peco-select-history
 #========================
 alias ls="lsd -al"
 alias cat="bat"
+alias dv="git co develop"
+alias pl="git pull"
 
 # GitHub
 # 現在のブランチの PR もしくは PR 作成画面をブラウザで開く
@@ -117,3 +119,12 @@ eval "$(anyenv init -)"
 
 # starship
 eval "$(starship init zsh)"
+
+# pyenv
+PYENV_ROOT="${HOME}/.pyenv"
+PATH="${PYENV_ROOT}/bin:${PATH}"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+fi
+
