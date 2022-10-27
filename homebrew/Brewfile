@@ -46,7 +46,7 @@ cask 'visual-studio-code'
 cask '1password'
 cask 'alfred'
 cask 'kindle'
-cask 'docker'
+cask 'rancher'
 cask 'font-hack-nerd-font' # 事前に brew tap homebrew/cask-fonts が必要
 
 # mas
