@@ -1,3 +1,7 @@
 .DS_Store
 .envrc
 .vscode
+
+.mise.toml
+mise.toml
+.claude/*

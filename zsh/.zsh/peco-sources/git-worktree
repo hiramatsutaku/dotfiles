@@ -1,0 +1,13 @@
+function peco-git-worktree() {
+  local selected selected_path
+  selected=$(git worktree list --porcelain | awk '
+    BEGIN { path = ""; ref = "" }
+    /^worktree / { path = $2 }
+    /^branch / { ref = $2; print path "\t[" ref "]" }
+  ' | peco)
+  selected_path=$(echo "$selected" | cut -f1)
+  if [[ -n "$selected_path" ]]; then
+    cd "$selected_path"
+  fi
+}
+zle -N peco-git-worktree
