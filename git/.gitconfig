@@ -15,8 +15,6 @@
   new = checkout -b
   st = status
   lo = log --oneline
-  wb = "!f() { WORKTREE_PATH=../$(basename $(pwd))-${1}; git worktree add $WORKTREE_PATH $2; }; f"
-  wd = worktree remove .
 
 [core]
   excludesfile = ~/.gitignore_global

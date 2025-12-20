@@ -98,13 +98,28 @@ bindkey '^w' peco-git-worktree
 #========================
 alias ls="lsd -al"
 alias cat="bat"
-alias dv="git co develop"
-alias mn="git co main"
-alias pl="git pull"
+alias gbr="git branch"
+alias gcm="git commit -m"
+alias gco="git checkout"
+alias gnew="git checkout -b"
+alias gst="git status"
+alias glo="git log --oneline"
+alias gdv="git co develop"
+alias gmn="git co main"
+alias gpl="git pull"
+alias gpr="gh pr view -w || gh pr create -w"
 
-# GitHub
-# 現在のブランチの PR もしくは PR 作成画面をブラウザで開く
-alias pr="gh pr view -w || gh pr create -w"
+# git worktree add
+gwb() {
+  local worktree_path=../$(basename $(pwd))-${1}
+  git worktree add "$worktree_path" $2
+}
+
+# git worktree を削除して元のリポジトリに戻る
+gwd() {
+  local main_worktree=$(git worktree list --porcelain | head -1 | sed 's/worktree //')
+  git worktree remove . && cd "$main_worktree"
+}
 
 # ローカルの設定を読み込む
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
