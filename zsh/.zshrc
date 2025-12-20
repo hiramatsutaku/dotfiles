@@ -90,6 +90,7 @@ bindkey '^@' peco-cdr
 bindkey '^[' peco-git-checkout
 bindkey '^]' peco-github-src
 bindkey '^r' peco-select-history
+bindkey '^w' peco-git-worktree
 
 
 #========================
