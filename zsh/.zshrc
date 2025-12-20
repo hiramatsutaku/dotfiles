@@ -98,6 +98,7 @@ bindkey '^r' peco-select-history
 alias ls="lsd -al"
 alias cat="bat"
 alias dv="git co develop"
+alias mn="git co main"
 alias pl="git pull"
 
 # GitHub
