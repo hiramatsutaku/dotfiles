@@ -131,17 +131,10 @@ gwd() {
 # direnv
 eval "$(direnv hook zsh)"
 
-# anyenv
-eval "$(anyenv init -)"
+# mise
+eval "$(mise activate zsh)"
 
 # starship
 eval "$(starship init zsh)"
 
-# pyenv
-PYENV_ROOT="${HOME}/.pyenv"
-PATH="${PYENV_ROOT}/bin:${PATH}"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-fi
-
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
