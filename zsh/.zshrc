@@ -104,10 +104,16 @@ alias gco="git checkout"
 alias gnew="git checkout -b"
 alias gst="git status"
 alias glo="git log --oneline"
+
 alias gdv="git co develop"
 alias gmn="git co main"
 alias gpl="git pull"
+alias dv="git co develop"
+alias mn="git co main"
+alias pl="git pull"
+
 alias gpr="gh pr view -w || gh pr create -w"
+alias pr="gh pr view -w || gh pr create -w"
 
 # git worktree add
 gwb() {
