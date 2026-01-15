@@ -48,6 +48,7 @@ cask 'visual-studio-code'
 # cask 'clipy' # M1 未対応
 cask '1password'
 cask 'alfred'
+cask 'alt-tab'
 cask 'kindle'
 cask 'font-hack-nerd-font' # 事前に brew tap homebrew/cask-fonts が必要
 
