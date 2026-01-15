@@ -4,10 +4,12 @@
 #
 tap 'homebrew/core'
 tap 'homebrew/bundle'
+tap 'FelixKratz/formulae'
 
 # brew
 brew 'anyenv'
 brew 'bat'
+brew 'borders'
 brew 'circleci'
 brew 'clisp'
 brew 'csview' # 事前に brew tap wfxr/csview が必要
@@ -21,8 +23,8 @@ brew 'jq'
 brew 'libxml2'
 brew 'libxslt'
 brew 'lsd'
-brew 'nkf'
 brew 'mas'
+brew 'nkf'
 brew 'openapi-generator'
 brew 'peco'
 brew 'starship'
