@@ -51,7 +51,9 @@ cask '1password'
 cask 'aerospace'
 cask 'alfred'
 cask 'alt-tab'
+cask 'ghostty'
 cask 'kindle'
+cask 'zed'
 cask 'font-hack-nerd-font' # 事前に brew tap homebrew/cask-fonts が必要
 
 # mas

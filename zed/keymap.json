@@ -1,0 +1,9 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      // base_keymap": "Emacs"と合わせて設定
+      "ctrl-[": "editor::SetMark",
+    },
+  },
+]
