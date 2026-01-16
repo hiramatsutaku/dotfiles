@@ -1,0 +1,18 @@
+font-family = "HackGen Console NF"
+font-size = 12
+theme = "Night Owl"
+background-opacity = 0.85
+background-blur-radius = 20
+macos-titlebar-style = hidden
+
+# Diff colors
+palette = 1=#cc3838
+palette = 2=#2fbb5a
+
+# Split pane
+unfocused-split-opacity = 0.5
+
+# Quick Terminal
+quick-terminal-position = top
+quick-terminal-animation-duration = 0
+keybind = global:ctrl+equal=toggle_quick_terminal

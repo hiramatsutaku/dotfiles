@@ -55,6 +55,7 @@ cask 'ghostty'
 cask 'kindle'
 cask 'zed'
 cask 'font-hack-nerd-font' # 事前に brew tap homebrew/cask-fonts が必要
+cask 'font-hackgen-nerd'
 
 # mas
 #
