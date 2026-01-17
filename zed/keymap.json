@@ -9,9 +9,27 @@
     },
   },
   {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-0": "pane::RevealInProjectPanel",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "enter": "project_panel::OpenPermanent",
+    },
+  },
+  {
     "context": "Workspace",
     "bindings": {
-      "ctrl-0": "project_panel::ToggleFocus",
+      "cmd-shift-g": "git_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "enter": "git_panel::Open",
     },
   },
 ]

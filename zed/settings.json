@@ -11,4 +11,7 @@
     "light": "Catppuccin Latte",
     "dark": "Catppuccin Frappé",
   },
+  "project_panel": {
+    "auto_reveal_entries": true,
+  },
 }
