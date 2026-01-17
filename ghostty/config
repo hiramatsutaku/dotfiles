@@ -1,5 +1,5 @@
 font-family = "HackGen Console NF"
-font-size = 16
+font-size = 14
 theme = "Night Owl"
 background-opacity = 0.85
 background-blur-radius = 20
@@ -28,5 +28,9 @@ mouse-hide-while-typing
 # カーソル設定
 cursor-style = block
 cursor-style-blink = false
+cursor-color = #FFFF00
 # シェル統合がカーソル設定を上書きするのを防ぐ
 shell-integration-features = no-cursor
+
+# 前の単語を削除 (ctrl-w を送信)
+keybind = ctrl+backspace=text:\x17

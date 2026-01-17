@@ -4,6 +4,14 @@
     "bindings": {
       // base_keymap": "Emacs"と合わせて設定
       "ctrl-[": "editor::SetMark",
+      // 前の単語を削除
+      "ctrl-backspace": "editor::DeleteToPreviousWordStart",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-0": "project_panel::ToggleFocus",
     },
   },
 ]

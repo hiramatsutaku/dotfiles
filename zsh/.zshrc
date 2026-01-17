@@ -55,6 +55,9 @@ PROMPT2="%_%% "
 SPROMPT="%r is correct? [n,y,a,e]: "
 RPROMPT=""
 
+# 単語の区切り文字を設定（backward-kill-word で "-" などで区切る）
+WORDCHARS='*?[]~=&;!#$%^(){}<>-'
+
 ### History ###
 # ヒストリを保存するファイル
 HISTFILE=~/.zsh_history
@@ -90,7 +93,7 @@ bindkey '^@' peco-cdr
 bindkey '^[' peco-git-checkout
 bindkey '^]' peco-github-src
 bindkey '^r' peco-select-history
-bindkey '^w' peco-git-worktree
+bindkey '^t' peco-git-worktree
 
 
 #========================
