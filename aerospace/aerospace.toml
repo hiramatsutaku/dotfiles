@@ -48,7 +48,7 @@ exec-on-workspace-change = [
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
-automatically-unhide-macos-hidden-apps = false
+automatically-unhide-macos-hidden-apps = true
 
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -106,16 +106,18 @@ alt-comma = 'layout accordion horizontal vertical'
 alt-f = 'layout floating tiling' # Toggle floating/tiling
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+# Emacs-style: b=left, f=right, p=up, n=down
+cmd-b = 'focus left'
+cmd-n = 'focus down'
+cmd-p = 'focus up'
+cmd-f = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-alt-shift-h = 'move left'
-alt-shift-j = 'move down'
-alt-shift-k = 'move up'
-alt-shift-l = 'move right'
+# Emacs-style: b=left, f=right, p=up, n=down
+cmd-shift-b = 'move left'
+cmd-shift-n = 'move down'
+cmd-shift-p = 'move up'
+cmd-shift-f = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-shift-minus = 'resize smart -50'
