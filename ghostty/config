@@ -1,0 +1,32 @@
+font-family = "HackGen Console NF"
+font-size = 16
+theme = "Night Owl"
+background-opacity = 0.85
+background-blur-radius = 20
+macos-titlebar-style = hidden
+
+# Diff colors
+palette = 1=#cc3838
+palette = 2=#2fbb5a
+
+# Split pane
+unfocused-split-opacity = 0.5
+
+# Quick Terminal
+quick-terminal-position = top
+quick-terminal-animation-duration = 0
+keybind = global:ctrl+equal=toggle_quick_terminal
+
+# Quick Terminalで横幅いっぱい表示した際に見やすいように
+window-padding-x = 5
+window-padding-y = 5
+window-padding-balance = true
+
+# 入力中はマウスカーソルを非表示にする
+mouse-hide-while-typing
+
+# カーソル設定
+cursor-style = block
+cursor-style-blink = false
+# シェル統合がカーソル設定を上書きするのを防ぐ
+shell-integration-features = no-cursor
