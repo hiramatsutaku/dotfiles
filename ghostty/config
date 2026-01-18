@@ -11,6 +11,7 @@ palette = 2=#2fbb5a
 
 # Split pane
 unfocused-split-opacity = 0.5
+unfocused-split-fill = #4a5568
 
 # Quick Terminal
 quick-terminal-position = top
