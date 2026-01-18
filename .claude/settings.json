@@ -15,6 +15,17 @@
           }
         ]
       }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Code needs attention\" with title \"Claude\" sound name \"Glass\"'"
+          }
+        ]
+      }
     ]
   }
 }
