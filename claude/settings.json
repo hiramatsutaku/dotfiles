@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "osascript -e 'display notification \"Claude Code finished\" with title \"Claude\" sound name \"Bottle\"'"
+            "command": "afplay /System/Library/Sounds/Bottle.aiff"
           }
         ]
       }
@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "osascript -e 'display notification \"Claude Code needs attention\" with title \"Claude\" sound name \"Glass\"'"
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
           }
         ]
       }
