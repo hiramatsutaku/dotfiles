@@ -103,21 +103,23 @@ outer.right =      10
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
-alt-f = 'layout floating tiling' # Toggle floating/tiling
+# floating toggle は service mode (alt-shift-; → f) で使用
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 # Emacs-style: b=left, f=right, p=up, n=down
-cmd-b = 'focus --boundaries-action wrap-around-the-workspace left'
-cmd-n = 'focus --boundaries-action wrap-around-the-workspace down'
-cmd-p = 'focus --boundaries-action wrap-around-the-workspace up'
-cmd-f = 'focus --boundaries-action wrap-around-the-workspace right'
+# alt を使用 (cmd は他のアプリと衝突するため)
+alt-b = 'focus --boundaries-action wrap-around-the-workspace left'
+alt-n = 'focus --boundaries-action wrap-around-the-workspace down'
+alt-p = 'focus --boundaries-action wrap-around-the-workspace up'
+alt-f = 'focus --boundaries-action wrap-around-the-workspace right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 # Emacs-style: b=left, f=right, p=up, n=down
-cmd-shift-b = 'move left'
-cmd-shift-n = 'move down'
-cmd-shift-p = 'move up'
-cmd-shift-f = 'move right'
+# alt-shift を使用 (cmd-shift は他のアプリと衝突するため)
+alt-shift-b = 'move left'
+alt-shift-n = 'move down'
+alt-shift-p = 'move up'
+alt-shift-f = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-shift-minus = 'resize smart -50'
