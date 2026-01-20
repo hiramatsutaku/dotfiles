@@ -12,13 +12,9 @@ local colors_spaces = {
 	[3] = colors.cmap_3,
 	[4] = colors.cmap_4,
 	[5] = colors.cmap_5,
-	[6] = colors.cmap_6,
-	[7] = colors.cmap_7,
-	[8] = colors.cmap_8,
-	[9] = colors.cmap_9,
 }
 
-for i = 1, 9, 1 do
+for i = 1, 5, 1 do
 	local space = sbar.add("item", "space." .. i, {
 		icon = {
 			font = {
@@ -64,10 +60,6 @@ sbar.add("bracket", {
 	spaces[3].name,
 	spaces[4].name,
 	spaces[5].name,
-	spaces[6].name,
-	spaces[7].name,
-	spaces[8].name,
-	spaces[9].name,
 }, {
 	background = {
 		color = colors.background,
@@ -81,7 +73,7 @@ sbar.add("item", { width = 6 })
 -- Initialize with current workspace
 sbar.exec("aerospace list-workspaces --focused", function(focused_workspace)
 	local focused = focused_workspace:gsub("%s+", "")
-	for i = 1, 9, 1 do
+	for i = 1, 5, 1 do
 		local is_focused = focused == tostring(i)
 		spaces[i]:set({
 			icon = { highlight = is_focused },
