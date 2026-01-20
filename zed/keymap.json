@@ -24,12 +24,9 @@
     "context": "Workspace",
     "bindings": {
       "cmd-shift-g": "git_panel::ToggleFocus",
+      // ペイン間移動
+      "ctrl-cmd-[": "workspace::ActivatePaneLeft",
+      "ctrl-cmd-]": "workspace::ActivatePaneRight",
     },
   },
-  {
-    "context": "GitPanel",
-    "bindings": {
-      "enter": "git_panel::Open",
-    },
-  },
-]
+  ]
