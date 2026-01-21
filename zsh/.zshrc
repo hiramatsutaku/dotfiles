@@ -94,6 +94,7 @@ bindkey '^[' peco-git-checkout
 bindkey '^]' peco-github-src
 bindkey '^r' peco-select-history
 bindkey '^t' peco-git-worktree
+bindkey '^g' peco-ghostty-switch
 
 
 #========================
