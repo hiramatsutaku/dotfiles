@@ -35,3 +35,6 @@ shell-integration-features = no-cursor
 
 # 前の単語を削除 (ctrl-w を送信)
 keybind = ctrl+backspace=text:\x17
+
+# セッション保存
+window-save-state = always
