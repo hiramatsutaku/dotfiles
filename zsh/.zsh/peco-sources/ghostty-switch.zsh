@@ -1,5 +1,5 @@
 function peco-ghostty-switch () {
-    local selected=$(osascript -e 'tell application "System Events"
+    local windows=$(osascript -e 'tell application "System Events"
         tell process "ghostty"
             set output to ""
             set windowList to every window
@@ -10,7 +10,18 @@ function peco-ghostty-switch () {
             end repeat
             return output
         end tell
-    end tell' 2>/dev/null | peco --prompt="Ghostty> ")
+    end tell' 2>/dev/null)
+
+    # CC ステータスを追加: ✳ があれば [CC] を付与
+    local formatted=$(echo "$windows" | while IFS=$'\t' read -r idx title; do
+        if [[ "$title" == *"✳"* ]]; then
+            echo -e "$idx\t[CC] $title"
+        else
+            echo -e "$idx\t     $title"
+        fi
+    done)
+
+    local selected=$(echo "$formatted" | peco --prompt="Ghostty> ")
 
     if [ -n "$selected" ]; then
         local index=$(echo "$selected" | cut -f1)

@@ -49,11 +49,11 @@ cask 'karabiner-elements'
 cask 'visual-studio-code'
 # cask 'clipy' # M1 未対応
 cask '1password'
-cask 'aerospace'
 cask 'alfred'
 cask 'ghostty'
 cask 'kindle'
 cask 'zed'
+cask 'codex'
 cask 'font-hack-nerd-font' # 事前に brew tap homebrew/cask-fonts が必要
 cask 'font-hackgen-nerd'
 
