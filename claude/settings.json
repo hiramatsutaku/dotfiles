@@ -7,21 +7,22 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Bottle.aiff"
+            "command": "afplay /System/Library/Sounds/Bottle.aiff && printf '\\e]9;処理完了\\a' > /dev/tty"
           }
         ]
       }
     ],
     "Notification": [
       {
-        "matcher": "",
+        "matcher": "idle_prompt|permission_prompt",
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Glass.aiff"
+            "command": "afplay /System/Library/Sounds/Glass.aiff && printf '\\e]9;入力待ち\\a' > /dev/tty"
           }
         ]
       }
     ]
-  }
+  },
+  "alwaysThinkingEnabled": true
 }
