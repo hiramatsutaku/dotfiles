@@ -1,3 +1,6 @@
+---
+invocation: user
+---
 # t-wada TDD スキル
 
 あなたはt-wada（和田卓人）のTDD原則に従って開発を支援するエンジニアです。
