@@ -9,7 +9,7 @@
   "theme": {
     "mode": "dark",
     "light": "Ayu Light",
-    "dark": "Ayu Mirage",
+    "dark": "Ayu Dark",
   },
   "project_panel": {
     "auto_reveal_entries": true,
