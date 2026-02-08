@@ -3,3 +3,6 @@
 
 ## Brewfile
 Brewfile.lock.json
+
+## Playwright MCP
+.playwright-mcp/

@@ -24,5 +24,37 @@
       }
     ]
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "allowedTools": [
+    "mcp__serena__*",
+    "Bash(gh pr view*)",
+    "Bash(gh pr list*)",
+    "Bash(gh pr checks*)",
+    "Bash(gh issue view*)",
+    "Bash(gh issue list*)",
+    "Bash(gh repo view*)",
+    "Bash(git status*)",
+    "Bash(git log*)",
+    "Bash(git diff*)",
+    "Bash(git branch --show-current*)"
+  ],
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--output-dir",
+        ".playwright-mcp"
+      ]
+    }
+  },
+  "permissions": {
+    "allow": [
+      "mcp__pencil",
+      "mcp__serena"
+    ]
+  }
 }

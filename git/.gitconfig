@@ -25,3 +25,5 @@
 
 [include]
   path = .gitconfig.local
+[wt]
+	basedir = .worktrees

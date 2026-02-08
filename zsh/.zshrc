@@ -119,17 +119,9 @@ alias pl="git pull"
 alias gpr="gh pr view -w || gh pr create -w"
 alias pr="gh pr view -w || gh pr create -w"
 
-# git worktree add
-gwb() {
-  local worktree_path=../$(basename $(pwd))-${1}
-  git worktree add "$worktree_path" $2
-}
-
-# git worktree を削除して元のリポジトリに戻る
-gwd() {
-  local main_worktree=$(git worktree list --porcelain | head -1 | sed 's/worktree //')
-  git worktree remove . && cd "$main_worktree"
-}
+# git-wt (git worktree wrapper)
+alias gwb="git wt"
+alias gwd="git wt -d"
 
 # ローカルの設定を読み込む
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
@@ -137,6 +129,9 @@ gwd() {
 # MEMO: homebrew の設定は .zshrc.local に置いた
 # # homebrew
 # eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# git-wt
+eval "$(git-wt --init zsh)"
 
 # direnv
 eval "$(direnv hook zsh)"

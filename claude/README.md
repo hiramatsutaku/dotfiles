@@ -6,6 +6,7 @@ Claude Code の設定ファイル。
 
 ```bash
 ln -sfn ~/src/github.com/hiramatsutaku/dotfiles/claude/skills ~/.claude/skills
+ln -sfn ~/src/github.com/hiramatsutaku/dotfiles/claude/commands ~/.claude/commands
 ```
 
 ## Skills
@@ -20,6 +21,10 @@ npm install -g @openai/codex
 ```
 
 ## Commands
+
+### /coderabbit-review
+
+現在のブランチのPRに対する CodeRabbit AI のレビューコメントを取得・要約する。
 
 ### /obsidian
 
