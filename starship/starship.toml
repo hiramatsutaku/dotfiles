@@ -63,6 +63,9 @@ format = "[$user]($style) "
 [aws]
 disabled = true
 
+[gcloud]
+disabled = true
+
 [directory]
 truncation_symbol = "…/"
 
@@ -94,7 +97,7 @@ pyenv_version_name = true
 format = "[$symbol]($style) "
 
 [time]
-disabled = false
+disabled = true
 format = '[\[$time\]]($style) '
 time_format = "%T"
 utc_time_offset = "+9"

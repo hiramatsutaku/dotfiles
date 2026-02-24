@@ -1,5 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "mcp__serena",
+      "mcp__pencil"
+    ]
+  },
   "hooks": {
     "Stop": [
       {
@@ -24,10 +33,10 @@
       }
     ]
   },
+  "language": "Japanese",
   "alwaysThinkingEnabled": true,
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-  },
+  "autoUpdatesChannel": "latest",
+  "plansDirectory": "./.claude/plans",
   "allowedTools": [
     "mcp__serena__*",
     "Bash(gh pr view*)",
@@ -39,7 +48,8 @@
     "Bash(git status*)",
     "Bash(git log*)",
     "Bash(git diff*)",
-    "Bash(git branch --show-current*)"
+    "Bash(git branch --show-current*)",
+    "Bash(curl -s https://api.x.ai/*)"
   ],
   "mcpServers": {
     "playwright": {
@@ -50,11 +60,5 @@
         ".playwright-mcp"
       ]
     }
-  },
-  "permissions": {
-    "allow": [
-      "mcp__pencil",
-      "mcp__serena"
-    ]
   }
 }

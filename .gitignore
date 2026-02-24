@@ -6,3 +6,6 @@ Brewfile.lock.json
 
 ## Playwright MCP
 .playwright-mcp/
+
+## Claude Code Plans
+.claude/plans/

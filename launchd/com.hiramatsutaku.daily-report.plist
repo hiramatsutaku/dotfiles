@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+	<!-- ジョブの識別子 (Label) -->
+	<!-- launchctl list でこのラベルで識別される -->
+	<key>Label</key>
+	<string>com.hiramatsutaku.daily-report</string>
+
+	<!-- 実行コマンドと引数 -->
+	<!-- claude -p: ヘッドレス・非インタラクティブモード -->
+	<!-- --permission-mode bypassPermissions: MCP ツールを含む全操作を許可 -->
+	<!--   dontAsk では「許可リストにないツールは使えない」ため MCP が使えなかった -->
+	<!--   bypassPermissions は launchd 自動実行（信頼済み環境）のみで使用すること -->
+	<!-- /daily-report: カスタムスキルを実行 -->
+	<key>ProgramArguments</key>
+	<array>
+		<string>/opt/homebrew/bin/claude</string>
+		<string>-p</string>
+		<string>--permission-mode</string>
+		<string>bypassPermissions</string>
+		<string>/daily-report</string>
+	</array>
+
+	<!-- 環境変数 -->
+	<!-- launchd のデフォルト PATH は /usr/bin:/bin 程度と狭い -->
+	<!-- /opt/homebrew/bin: gh, docker などの Homebrew 製ツールのパス -->
+	<!-- HOME: ~ を展開するために必要 -->
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+		<key>HOME</key>
+		<string>/Users/hirataku</string>
+	</dict>
+
+	<!-- 作業ディレクトリ -->
+	<!-- 日報スキルが records/ にファイルを作成するためのカレントディレクトリ -->
+	<key>WorkingDirectory</key>
+	<string>/Users/hirataku/src/github.com/RECERQA/rq-hiramatsu</string>
+
+	<!-- 実行スケジュール: 毎日 0:00 (深夜0時) -->
+	<!-- macOS がスリープ中の場合は実行されない点に注意 -->
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Hour</key>
+		<integer>0</integer>
+		<key>Minute</key>
+		<integer>0</integer>
+	</dict>
+
+	<!-- ログ出力先 -->
+	<!-- stdout/stderr を同一ファイルにまとめて出力 -->
+	<!-- Slack OAuth 期限切れ等のエラー検出に使用 -->
+	<key>StandardOutPath</key>
+	<string>/Users/hirataku/Library/Logs/daily-report.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/hirataku/Library/Logs/daily-report.log</string>
+
+	<!-- launchctl load 時に即時実行しない -->
+	<!-- true にすると load 直後にも実行される（不要なため false） -->
+	<key>RunAtLoad</key>
+	<false/>
+
+</dict>
+</plist>
