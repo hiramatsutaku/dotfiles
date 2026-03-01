@@ -33,6 +33,9 @@
       }
     ]
   },
+  "enabledPlugins": {
+    "slack@claude-plugins-official": true
+  },
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
   "autoUpdatesChannel": "latest",
@@ -52,6 +55,14 @@
     "Bash(curl -s https://api.x.ai/*)"
   ],
   "mcpServers": {
+    "slack": {
+      "type": "http",
+      "url": "https://mcp.slack.com/mcp",
+      "oauth": {
+        "clientId": "1601185624273.8899143856786",
+        "callbackPort": 3118
+      }
+    },
     "playwright": {
       "command": "npx",
       "args": [

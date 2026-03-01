@@ -42,7 +42,6 @@ return {
 	["Finder"] = ":finder_thick:",
 	["Firefox Developer Edition"] = ":firefox:",
 	["Font Book"] = ":font_book:",
-	["Ghostty"] = ":ghostty2:",
 	["GitHub Desktop"] = ":github_desktop:",
 	["Goodnotes"] = ":goodnotes:",
 	["Google Docs"] = ":google_docs:",
