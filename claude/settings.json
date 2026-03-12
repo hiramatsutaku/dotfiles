@@ -34,7 +34,8 @@
     ]
   },
   "enabledPlugins": {
-    "slack@claude-plugins-official": true
+    "slack@claude-plugins-official": true,
+    "coderabbit@claude-plugins-official": true
   },
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
@@ -71,5 +72,6 @@
         ".playwright-mcp"
       ]
     }
-  }
+  },
+  "effortLevel": "high"
 }

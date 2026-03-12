@@ -142,3 +142,7 @@ eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
+# Added by CodeRabbit CLI installer
+export PATH="/Users/hirataku/.local/bin:$PATH"

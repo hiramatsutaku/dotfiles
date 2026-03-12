@@ -27,3 +27,5 @@
   path = .gitconfig.local
 [wt]
 	basedir = .worktrees
+[coderabbit]
+	machineId = cli/4873155e784b40828899dc29dc2a62b7
