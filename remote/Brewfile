@@ -1,6 +1,3 @@
-# tap
-tap 'homebrew/bundle'
-
 # prompt & shell plugins
 brew 'starship'
 brew 'zsh-autosuggestions'
