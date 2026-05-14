@@ -1,5 +1,24 @@
 {
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "cli_default_open_behavior": "existing_window",
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
   "agent": {
+    "dock": "left",
     "default_model": {
       "provider": "anthropic",
       "model": "claude-opus-4-6-1m-context-thinking-latest",
@@ -21,6 +40,7 @@
     "dark": "Colorizer Pro",
   },
   "project_panel": {
+    "dock": "right",
     "auto_reveal_entries": true,
   },
 }
