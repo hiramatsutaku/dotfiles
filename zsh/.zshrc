@@ -146,3 +146,11 @@ export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 
 # Added by CodeRabbit CLI installer
 export PATH="/Users/hirataku/.local/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/hirataku/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
