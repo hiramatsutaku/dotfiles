@@ -1,0 +1,89 @@
+#========================
+# general
+#========================
+setopt AUTO_CD
+DIRSTACKSIZE=100
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+
+### Complement ###
+autoload -Uz compinit; compinit
+zstyle ':completion:*:default' menu select=2
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+### Color ###
+autoload -Uz colors
+colors
+
+#========================
+# history
+#========================
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
+# cdr
+autoload -Uz is-at-least
+if is-at-least 4.3.11; then
+  autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+  add-zsh-hook chpwd chpwd_recent_dirs
+  zstyle ':chpwd:*' recent-dirs-max 1000
+  zstyle ':chpwd:*' recent-dirs-default yes
+  zstyle ':completion:*' recent-dirs-insert both
+fi
+
+#========================
+# homebrew (Apple Silicon)
+#========================
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+#========================
+# zsh plugins
+#========================
+[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#========================
+# fzf
+#========================
+[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && \
+  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ] && \
+  source /opt/homebrew/opt/fzf/shell/completion.zsh
+
+#========================
+# alias
+#========================
+alias ls="eza -al --git --icons=never"
+alias ll="eza -l --git --icons=never"
+alias tree="eza --tree --icons=never"
+alias cat="bat"
+alias gbr="git branch"
+alias gcm="git commit -m"
+alias gco="git checkout"
+alias gnew="git checkout -b"
+alias gst="git status"
+alias glo="git log --oneline"
+alias gdv="git checkout develop"
+alias gmn="git checkout main"
+alias gpl="git pull"
+alias gpr="gh pr view -w || gh pr create -w"
+
+#========================
+# starship
+#========================
+eval "$(starship init zsh)"
+
+# ローカル固有の設定 (PATH 追加など) は ~/.zshrc.local に書く
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

@@ -1,0 +1,20 @@
+# tap
+tap 'homebrew/bundle'
+
+# prompt & shell plugins
+brew 'starship'
+brew 'zsh-autosuggestions'
+brew 'zsh-syntax-highlighting'
+
+# fuzzy finder
+brew 'fzf'
+
+# modern CLI replacements
+brew 'eza'
+brew 'bat'
+brew 'ripgrep'
+brew 'fd'
+
+# git / GitHub
+brew 'git'
+brew 'gh'
