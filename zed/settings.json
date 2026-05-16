@@ -1,4 +1,5 @@
 {
+  "diff_view_style": "unified",
   "agent_servers": {
     "codex-acp": {
       "type": "registry"
@@ -20,9 +21,10 @@
   "agent": {
     "dock": "left",
     "default_model": {
+      "effort": "high",
       "provider": "anthropic",
-      "model": "claude-opus-4-6-1m-context-thinking-latest",
-      "enable_thinking": false
+      "model": "claude-opus-4-7-latest",
+      "enable_thinking": true
     },
     "favorite_models": [],
     "model_parameters": []
