@@ -93,9 +93,16 @@ claude -p "あなたは独立したコードレビュアーです。現在のブ
 
 手順:
 
-1. 上記の証跡を撮影する（Phase 2 の修正が固まった後に撮る。途中で撮ると古くなる）。
-2. **gh CLI では画像を PR に添付できない**（`github.com/user-attachments/...` は web セッション cookie 経由のアップロードでしか生成できず、PAT トークンの gh では原理的に不可）。撮影したファイルをユーザーがドラッグしやすいパスに置き、キャプション文を用意した上で、**「このファイルを PR にドラッグ&ドロップしてください」と能動的に依頼する**（最後のドロップだけ手動）。
-3. 併せて、対象 issue の完了条件を 1 項目ずつ「どう確認したか」を対応づけて `gh pr comment` で PR にコメントする。
+1. 上記の証跡を撮影する（Phase 2 の修正が固まった後に撮る。途中で撮ると古くなる）。保存先はセッションの scratchpad（file_upload が読めるのはセッション共有フォルダのみ）。
+2. **claude-in-chrome 経由で user-attachments に自動添付する**（gh CLI では添付不可: `github.com/user-attachments/...` は web セッション cookie 経由のみ。ただし private リポジトリの user-attachments はリポジトリアクセス権者限定配信＝ org 内に閉じたままインライン描画・永続なので、これが本命経路）:
+   1. `tabs_context_mcp` → `navigate` で PR ページを開く。GitHub 未ログインの 404 ならユーザーにログインを依頼（初回のみ。資格情報入力は自分では行わない）
+   2. 新規コメント欄の file input `#fc-new_comment_field` は hidden なので、`javascript_tool` で可視化する: `el.hidden=false; el.style.cssText='display:block !important;...'; el.setAttribute('aria-label','evidence-file-upload-input')`
+   3. `find` で ref を取得し `file_upload` で PNG を投入（コメントボタンは押さない）
+   4. 3 秒ほど待って textarea（`#new_comment_field`）の value から挿入された `<img ... src="https://github.com/user-attachments/assets/<uuid>">` を取得
+   5. **textarea を必ずクリア**（`ta.value=''` + input イベント dispatch）して下書き・誤投稿を残さない
+   6. 取得した img タグを `gh api ... -X PATCH`（既存コメント追記）や `gh pr comment` で埋め込む
+   - フォールバック（拡張がどうしても接続できない場合のみ）: ファイルを `~/Desktop` に置きキャプションを用意して、ドラッグ&ドロップだけユーザーに依頼する
+3. 併せて、対象 issue の完了条件を 1 項目ずつ「どう確認したか」を対応づけて `gh pr comment` で PR にコメントする（証跡画像はこのコメントに埋め込むと 1 箇所にまとまる）。
 4. 証跡が貼られる前に PR をマージ導線へ乗せない。並列 sub agent 運用では特に落ちやすいので、コーディネーターが PR ごとに添付済みかを確認する。
 
 ## Phase 4: 最終報告
@@ -106,7 +113,7 @@ claude -p "あなたは独立したコードレビュアーです。現在のブ
 - 見送った指摘と、その理由
 - 2 周で解消しなかった残課題（あれば）
 - push 後に CodeRabbit の新着コメントが増えていないかの最終確認結果
-- **動作証跡のファイルパス（能動的に提示）と、ユーザーへのドラッグ&ドロップ依頼**
+- **動作証跡がインライン添付済みであることの確認結果（コメント URL と画像描画確認）**
 
 ## 原則
 
