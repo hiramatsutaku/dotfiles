@@ -28,11 +28,19 @@ Phase 4: 最終報告
 セッションをまたいでも、これで同じコメントを引き当てて更新し続ける（冪等）:
 
 ```sh
-gh api repos/{owner}/{repo}/issues/<pr>/comments --paginate \
-  --jq '[.[] | select(.body | startswith("<!-- pr-quality-loop-status -->")) | .id] | first // empty'
+gh api "repos/{owner}/{repo}/issues/<pr>/comments?per_page=100" --paginate --slurp \
+  | jq -r '[.[][] | select(.body | startswith("<!-- pr-quality-loop-status -->")) | .id] | first // empty'
 ```
 
 該当が無ければ空文字が返る（exit 0）。空なら新規作成、id が取れたら更新に回す。
+
+**`--paginate --jq` を使わないこと。** `--jq` はページごとに適用されるため、`| first` がページ単位で
+効いてしまい、該当コメントが複数ページにまたがると id が複数行出力されて PATCH の URL が壊れる。
+`--slurp` は「ページの配列」を返すので `.[][]` で二段階に平坦化する
+（`--slurp` は `--jq` と併用できないため、`gh` の外でパイプして `jq` に渡す）。
+
+万一マーカー付きコメントが複数見つかったら（並行セッションが同時に「無い」と判定して二重作成した等）、
+**最小の id（最古）を正とし、残りは `gh api repos/{owner}/{repo}/issues/comments/<id> -X DELETE` で消す**。
 
 ### 作成と更新
 
@@ -73,13 +81,17 @@ gh api repos/{owner}/{repo}/issues/comments/<id> -X PATCH --input "$PAYLOAD" --j
 
 ### 更新タイミング
 
+**各更新では、終えた Phase を `✅`（または `⚠️`）にすると同時に、次に入る Phase を `🔄` にし、
+見出しの「現在: Phase N」も書き換える。** これを守らないと、Phase 2 のレビュー実行中や Phase 3 の
+証跡取得中といった長い区間で、PR 側の表示が前のフェーズのまま古びる。
+
 | # | タイミング | 書き込む内容 |
 |---|---|---|
-| 1 | Phase 0 完了直後 | コメントを作成（既存があれば再利用して初期化）。base と PR 番号 |
-| 2 | Phase 1 開始 | Phase 1 を 🔄 に（CodeRabbit 待ちであることを明示） |
-| 3 | Phase 1 完了 | 指摘件数と対応 / 見送りの内訳。レート制限・未導入・タイムアウトなら ⚠️ と理由 |
-| 4 | Phase 2 の各周完了 | 周回数、レビュアーごとの指摘件数、対応 / 見送り |
-| 5 | Phase 3 完了 | 証跡コメントへのリンク |
+| 1 | Phase 0 完了直後 | コメントを作成（既存があれば再利用して初期化）。base と PR 番号。Phase 1 を 🔄 に |
+| 2 | Phase 1 開始 | CodeRabbit 待ちであることを明示（ポーリング上限も書く） |
+| 3 | Phase 1 完了 | 指摘件数と対応 / 見送りの内訳。レート制限・未導入・タイムアウトなら ⚠️ と理由。**Phase 2 を 🔄 に** |
+| 4 | Phase 2 の各周完了 | 周回数、レビュアーごとの指摘件数、対応 / 見送り。次周に入るなら 🔄 のまま、Phase 3 へ進むなら **Phase 3 を 🔄 に** |
+| 5 | Phase 3 完了 | 証跡コメントへのリンク。**Phase 4 を 🔄 に** |
 | 6 | Phase 4 完了 | 全行を確定し、残課題を併記 |
 
 ### 失敗時の扱い
