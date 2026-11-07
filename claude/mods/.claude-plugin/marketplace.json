@@ -1,0 +1,18 @@
+{
+  "name": "hiramatsutaku-mods",
+  "owner": {
+    "name": "hiramatsutaku"
+  },
+  "plugins": [
+    {
+      "name": "prompt-history",
+      "source": "./prompt-history",
+      "description": "このセッションで入力したプロンプトの直近 10 件をプロンプトの上に出す"
+    },
+    {
+      "name": "blast-radius",
+      "source": "./blast-radius",
+      "description": "rm -rf・git reset --hard・force push・migrate を止め、何が変わるかを見せて Proceed / Cancel を選ばせる（anthropics/claude-code-playground の公式サンプル、Apache-2.0）"
+    }
+  ]
+}

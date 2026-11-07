@@ -1,0 +1,7 @@
+{
+  "name": "prompt-history",
+  "version": "0.1.0",
+  "description": "このセッションで入力したプロンプトの直近 10 件をプロンプトの上に出す",
+  "author": { "name": "hiramatsutaku" },
+  "types": "./types/index.d.ts"
+}
