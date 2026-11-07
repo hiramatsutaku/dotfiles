@@ -2,9 +2,25 @@
   "diff_view_style": "unified",
   "agent_servers": {
     "codex-acp": {
+      "default_config_options": {
+        "mode": "full-access"
+      },
       "type": "registry"
     },
     "claude-acp": {
+      "default_config_options": {
+        "effort": "max",
+        "mode": "bypassPermissions",
+        "model": "default"
+      },
+      "favorite_config_option_values": {
+        "effort": [
+          "max",
+          "xhigh",
+          "high",
+          "medium"
+        ]
+      },
       "type": "registry"
     }
   },
