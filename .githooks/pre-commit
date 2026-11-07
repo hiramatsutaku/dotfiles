@@ -10,7 +10,10 @@
 #      既定は ~/.config/dotfiles/forbidden-patterns。DOTFILES_FORBIDDEN_PATTERNS で差し替えられる
 #      空行と `#` で始まる行は無視する
 #
-# 検査対象は staged の「追加行」と「追加・変更・リネームされたファイルのパス」。大文字小文字は無視する。
+# 検査対象は staged の「追加行の中身」と「追加・変更・リネーム・種別変更されたファイルのパス」。
+# 大文字小文字は無視する。追加行はパスを付けずに中身だけで照合するので、`^` 始まりのパターンも効く。
+# 当たった行は「パス:行番号」だけを出し、中身は出さない（秘密情報を端末やログに残さないため）。
+# grep 自体が失敗したとき（パターンの書き間違いなど）は、検査できていないので止める。
 # 誤検知で止まったときは、内容を確認したうえで `git commit --no-verify` で通す。
 #
 # 導入: ln -sfn ../../.githooks/pre-commit .git/hooks/pre-commit
@@ -42,29 +45,63 @@ else
   echo "pre-commit: 個人用の検出パターン $PATTERN_FILE が無いので、組み込みパターンだけで検査する" >&2
 fi
 
+fail_closed() {
+  echo "pre-commit: $1" >&2
+  echo "検査できなかったので commit を止めた。パターンファイル $PATTERN_FILE を確認する" >&2
+  exit 1
+}
+
+# grep の終了コードは 0 = 一致, 1 = 不一致, 2 以上 = 失敗。失敗を「不一致」と取り違えないよう分ける
+# 使い方: match <入力> <出力> [grep の追加オプション]。一致すれば 0、不一致なら 1 を返す
+match() {
+  local input=$1 output=$2 rc=0
+  shift 2
+  grep -i -E "$@" -f "$patterns" "$input" > "$output" || rc=$?
+  # bash 3.2 は $var の直後に全角文字が続くと変数名の一部として読むので、必ず ${var} で囲む
+  [[ ${rc} -ge 2 ]] && fail_closed "grep が失敗した（終了コード ${rc}）"
+  return $rc
+}
+
 found=0
 
-# 1. 追加・変更・リネームされたファイルのパス
-if git diff --cached --name-only -z --diff-filter=ACMR \
-  | tr '\0' '\n' \
-  | grep -i -E -f "$patterns" > "$tmpdir/paths"; then
+# 1. 追加・変更・リネーム・種別変更（T: 通常ファイル ⇔ symlink など）されたファイルのパス
+git diff --cached --name-only -z --diff-filter=ACMRT > "$tmpdir/paths.z"
+tr '\0' '\n' < "$tmpdir/paths.z" > "$tmpdir/paths"
+if match "$tmpdir/paths" "$tmpdir/path-hits"; then
   echo "pre-commit: 検出パターンに当たるファイル名があります:" >&2
-  sed 's/^/  /' "$tmpdir/paths" >&2
+  sed 's/^/  /' "$tmpdir/path-hits" >&2
   found=1
 fi
 
-# 2. staged の追加行。「パス:行」の形にしてから検査する
+# 2. staged の追加行。中身を added に、対応する「パス:行番号」を loc に同じ行順で書く
+#    ファイルヘッダー（+++）は最初の @@ より前にしか出ないので、hunk の中の「++ 」始まりの追加行と取り違えない
 #    バイナリは "Binary files ... differ" になり + 行が出ないので対象外になる
-git diff --cached --no-color --no-ext-diff -U0 --diff-filter=ACMR \
-  | awk '
-      /^\+\+\+ / { path = substr($0, 7); next }   # "+++ b/<path>" からパスを取る
-      /^\+/      { print path ":" substr($0, 2) }
-    ' > "$tmpdir/added"
+#    symlink はリンク先の文字列が追加行として出るので、それも検査される
+git diff --cached --no-color --no-ext-diff -U0 --diff-filter=ACMRT \
+  --src-prefix=a/ --dst-prefix=b/ \
+  | awk -v added="$tmpdir/added" -v loc="$tmpdir/loc" '
+      /^diff --git / { in_hunk = 0; next }
+      !in_hunk && /^\+\+\+ / { path = substr($0, 7); next }   # "+++ b/<path>"
+      /^@@ / {
+        in_hunk = 1
+        # "@@ -a,b +c,d @@" の c が新しい側の開始行
+        split($3, r, ",")
+        line = substr(r[1], 2) + 0
+        next
+      }
+      in_hunk && /^\+/ {
+        print substr($0, 2) > added
+        print path ":" line > loc
+        line++
+      }
+    '
+touch "$tmpdir/added" "$tmpdir/loc"
 
-if grep -i -E -f "$patterns" "$tmpdir/added" > "$tmpdir/hits"; then
-  echo "pre-commit: 検出パターンに当たる追加行があります:" >&2
-  # 秘密情報を端末やログにそのまま流さないよう、行は 200 文字で切る
-  cut -c1-200 "$tmpdir/hits" | sed 's/^/  /' >&2
+if match "$tmpdir/added" "$tmpdir/line-hits" -n; then
+  echo "pre-commit: 検出パターンに当たる追加行があります（中身は表示しない）:" >&2
+  cut -d: -f1 "$tmpdir/line-hits" > "$tmpdir/hit-index"
+  awk 'NR == FNR { want[$1] = 1; next } want[FNR] { print "  " $0 }' \
+    "$tmpdir/hit-index" "$tmpdir/loc" >&2
   found=1
 fi
 
