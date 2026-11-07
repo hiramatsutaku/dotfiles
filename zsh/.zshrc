@@ -122,6 +122,79 @@ alias pr="gh pr view -w || gh pr create -w"
 alias gwb="git wt"
 alias gwd="git wt -d"
 
+# Claude Code プロファイル切り替え
+# CLAUDE_CONFIG_DIR ごとに .claude.json・設定・Keychain の資格情報が分かれるので、
+# プロファイルごとに 1 回 /login すれば以降は行き来しても再ログイン不要。
+# 既定（CLAUDE_CONFIG_DIR 未設定 = ~/.claude）が仕事用アカウント。
+# 注意: CLAUDE_CONFIG_DIR は絶対パス必須。セッション途中の変更は効かないので起動前に決める。
+#       ディレクトリ名を変えると Keychain のサービス名（パスの sha256 由来）も変わり
+#       再ログインが必要になるため、プロファイル名は決め打ちにする
+CLAUDE_PROFILE_ROOT="$HOME/.claude-profiles"
+CLAUDE_DOTFILES_DIR="$HOME/src/github.com/hiramatsutaku/dotfiles/claude"
+
+# 新しいプロファイルを作る。dotfiles の設定を symlink で共有し、
+# settings.json だけは dotfiles 版のコピーにする。dotfiles 版には会社の設定
+# （OTEL など）を入れず claude/work/settings.work.json に分けている（docs/decisions/008）
+claude-profile-create() {
+  local name=$1
+  if [[ -z $name ]]; then
+    print -u2 "usage: claude-profile-create <name>"
+    return 1
+  fi
+  local dir="$CLAUDE_PROFILE_ROOT/$name"
+  if [[ -e $dir ]]; then
+    print -u2 "claude-profile-create: already exists: $dir"
+    return 1
+  fi
+  local dot=$CLAUDE_DOTFILES_DIR
+  if [[ ! -d $dot ]]; then
+    print -u2 "claude-profile-create: dotfiles not found: $dot"
+    return 1
+  fi
+  mkdir -p "$dir" || return 1
+  local item
+  for item in rules skills commands scripts keybindings.json; do
+    [[ -e "$dot/$item" ]] && ln -sfn "$dot/$item" "$dir/$item"
+  done
+  [[ -e "$HOME/.claude/CLAUDE.md" ]] && ln -sfn "$HOME/.claude/CLAUDE.md" "$dir/CLAUDE.md"
+  # 念のため OTEL 系も落とす。dotfiles 版に紛れ込んでも、個人利用が会社の telemetry に乗らないようにする
+  if [[ -f "$dot/settings.json" ]]; then
+    jq '.env |= with_entries(select(.key | (startswith("OTEL_") or . == "CLAUDE_CODE_ENABLE_TELEMETRY") | not))' \
+      "$dot/settings.json" > "$dir/settings.json" || return 1
+  fi
+  print "created: $dir"
+  ls -1 "$dir" | sed 's/^/  /'
+  print "次に: claude-profile $name で起動して /login"
+}
+
+claude-profile() {
+  local name=$1
+  if [[ -z $name ]]; then
+    print -u2 "usage: claude-profile <name> [claude args...]"
+    print -u2 "       claude-profile-create <name>   # 新規作成"
+    print -u2 "profiles: $(ls -1 "$CLAUDE_PROFILE_ROOT" 2>/dev/null | tr '\n' ' ')"
+    return 1
+  fi
+  local dir="$CLAUDE_PROFILE_ROOT/$name"
+  if [[ ! -d $dir ]]; then
+    print -u2 "claude-profile: no such profile: $name ($dir)"
+    print -u2 "profiles: $(ls -1 "$CLAUDE_PROFILE_ROOT" 2>/dev/null | tr '\n' ' ')"
+    print -u2 "作成するには: claude-profile-create $name"
+    return 1
+  fi
+  shift
+  CLAUDE_CONFIG_DIR="$dir" command claude "$@"
+}
+
+# プロファイル名を補完する（claude-profile / claude-profile-create の第 1 引数）
+_claude_profile_names() {
+  local -a names
+  names=(${(f)"$(ls -1 "$CLAUDE_PROFILE_ROOT" 2>/dev/null)"})
+  _describe 'profile' names
+}
+compdef _claude_profile_names claude-profile
+compdef _claude_profile_names claude-profile-create
+
 # ローカルの設定を読み込む
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
@@ -154,3 +227,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
