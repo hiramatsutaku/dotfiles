@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** ssh 先 macOS (rq-macstudionoMac-Studio.local / Apple Silicon) を軽量・冪等に整えるための `remote/` サブセットを dotfiles リポに追加する。
+**Goal:** ssh 先 macOS (Mac Studio / Apple Silicon) を軽量・冪等に整えるための `remote/` サブセットを dotfiles リポに追加する。
 
 **Architecture:** 既存 dotfiles 構造（ツール単位ディレクトリ + `~/.zshrc.local` で差分吸収）を踏襲し、`remote/` 配下に Brewfile・軽量 zshrc・bootstrap スクリプト・README を置く。starship 設定はローカルと共有（`starship/starship.toml` を symlink）。決定記録は `docs/decisions/005-remote-shell-setup.md` に既に追加済み。
 
@@ -404,7 +404,7 @@ Expected: GitHub に反映される。ssh 先からは `git clone https://github
 - [ ] **Step 1: ssh して bootstrap を実行**
 
 ```sh
-ssh taku@rq-macstudionoMac-Studio.local
+ssh <user>@<remote-host>.local
 mkdir -p ~/src/github.com/hiramatsutaku && cd ~/src/github.com/hiramatsutaku
 git clone https://github.com/hiramatsutaku/dotfiles.git
 bash dotfiles/remote/bootstrap.sh
