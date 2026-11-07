@@ -9,3 +9,26 @@ Brewfile.lock.json
 
 ## Claude Code Plans
 .claude/plans/
+
+## 会社用のファイル（public リポジトリに出さない。docs/decisions/008 参照）
+claude/work/
+
+## prompt-review の出力。社内の作業内容が入るので追跡しない
+reports/
+
+## 会社の作業に依存する launchd ジョブ（~/Library/LaunchAgents から symlink されるので実体はここに置く）
+launchd/com.hiramatsutaku.daily-report.plist
+
+## claude.ai から自動同期されるスキルと、削除済みスキルの退避先
+claude/skills/synced/
+claude/skills/.trash/
+
+## インストーラが張るスキルの symlink（マシンごとに異なる）
+claude/skills/computer-use
+claude/skills/herdr
+claude/skills/hunk-review
+claude/skills/orca-cli
+claude/skills/orchestration
+
+## 手作業のバックアップ
+*.bak

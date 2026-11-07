@@ -21,6 +21,9 @@ launchctl load ~/Library/LaunchAgents/com.hiramatsutaku.daily-report.plist
 |---------|------|------------|
 | `com.hiramatsutaku.daily-report.plist` | `/daily-report` スキルを自動実行 | 毎日 0:00 |
 
+`com.hiramatsutaku.daily-report.plist` は会社の作業ディレクトリを前提にしているので、
+リポジトリでは追跡せず（`.gitignore` 済み）手元にだけ置く。理由は `docs/decisions/008-keep-work-files-out-of-public-repo.md`。
+
 ## 確認・デバッグ
 
 ```bash
