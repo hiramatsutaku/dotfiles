@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# pre-commit - 会社の情報や秘密情報を public リポジトリに commit させないフック
+#
+# このリポジトリは public なので、会社名・社内リポジトリ名・トークンなどが
+# staged の差分に入っていたら commit を止める。
+#
+# 検出パターンは 2 種類:
+#   1. 組み込み: どのリポジトリでも漏れてはいけない秘密情報の形（下の BUILTIN_PATTERNS）
+#   2. 個人用: repo の外のファイルに 1 行 1 つの ERE で書く（社名をここに書くと public に出るため）
+#      既定は ~/.config/dotfiles/forbidden-patterns。DOTFILES_FORBIDDEN_PATTERNS で差し替えられる
+#      空行と `#` で始まる行は無視する
+#
+# 検査対象は staged の「追加行」と「追加・変更・リネームされたファイルのパス」。大文字小文字は無視する。
+# 誤検知で止まったときは、内容を確認したうえで `git commit --no-verify` で通す。
+#
+# 導入: ln -sfn ../../.githooks/pre-commit .git/hooks/pre-commit
+# 背景: docs/decisions/008-keep-work-files-out-of-public-repo.md
+set -euo pipefail
+
+PATTERN_FILE="${DOTFILES_FORBIDDEN_PATTERNS:-$HOME/.config/dotfiles/forbidden-patterns}"
+
+# 秘密情報の形。誤検知を減らすため、値の部分に長さの下限を付けている
+BUILTIN_PATTERNS=(
+  'bearer[[:space:]]+[a-z0-9._~+/=-]{20,}'        # HTTP の Bearer トークン
+  'akia[0-9a-z]{16}'                              # AWS のアクセスキー ID
+  '-----begin [a-z ]*private key-----'            # 秘密鍵
+  'gh[pousr]_[a-z0-9]{36,}'                       # GitHub のトークン
+  'xox[abprs]-[a-z0-9-]{10,}'                     # Slack のトークン
+  '(^|[^a-z0-9])sk-(ant-)?[a-z0-9_-]{32,}'        # Anthropic / OpenAI の API キー
+)
+
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
+patterns="$tmpdir/patterns"
+
+printf '%s\n' "${BUILTIN_PATTERNS[@]}" > "$patterns"
+
+if [[ -f "$PATTERN_FILE" ]]; then
+  # 空行が 1 行でも混ざると grep -f は全行にマッチするので、ここで必ず落とす
+  sed -e 's/\r$//' -e '/^[[:space:]]*$/d' -e '/^[[:space:]]*#/d' "$PATTERN_FILE" >> "$patterns"
+else
+  echo "pre-commit: 個人用の検出パターン $PATTERN_FILE が無いので、組み込みパターンだけで検査する" >&2
+fi
+
+found=0
+
+# 1. 追加・変更・リネームされたファイルのパス
+if git diff --cached --name-only -z --diff-filter=ACMR \
+  | tr '\0' '\n' \
+  | grep -i -E -f "$patterns" > "$tmpdir/paths"; then
+  echo "pre-commit: 検出パターンに当たるファイル名があります:" >&2
+  sed 's/^/  /' "$tmpdir/paths" >&2
+  found=1
+fi
+
+# 2. staged の追加行。「パス:行」の形にしてから検査する
+#    バイナリは "Binary files ... differ" になり + 行が出ないので対象外になる
+git diff --cached --no-color --no-ext-diff -U0 --diff-filter=ACMR \
+  | awk '
+      /^\+\+\+ / { path = substr($0, 7); next }   # "+++ b/<path>" からパスを取る
+      /^\+/      { print path ":" substr($0, 2) }
+    ' > "$tmpdir/added"
+
+if grep -i -E -f "$patterns" "$tmpdir/added" > "$tmpdir/hits"; then
+  echo "pre-commit: 検出パターンに当たる追加行があります:" >&2
+  # 秘密情報を端末やログにそのまま流さないよう、行は 200 文字で切る
+  cut -c1-200 "$tmpdir/hits" | sed 's/^/  /' >&2
+  found=1
+fi
+
+if [[ $found -ne 0 ]]; then
+  cat >&2 <<'EOF'
+
+このリポジトリは public です。会社用のものは claude/work/（ignore 済み）に置いてください。
+誤検知なら、内容を確認したうえで `git commit --no-verify` で通せます。
+EOF
+  exit 1
+fi
