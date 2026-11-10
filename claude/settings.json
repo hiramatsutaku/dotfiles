@@ -13,9 +13,23 @@
       "Bash(brew install *)",
       "Bash(chmod 777 *)",
       "Bash(rm -rf /*)",
-      "Bash(gh repo delete *)"
+      "Bash(gh repo delete *)",
+      "Bash(op)",
+      "Bash(op *)",
+      "Bash(/opt/homebrew/bin/op *)",
+      "Bash(security find-generic-password *)",
+      "Bash(/usr/bin/security find-generic-password *)",
+      "Bash(command op *)",
+      "Bash(env op *)",
+      "Bash(security * find-generic-password *)"
     ],
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "ask": [
+      "Bash(opsa read *)",
+      "Bash(opsa item get *)",
+      "Bash(opsa * read *)",
+      "Bash(opsa * item get *)"
+    ]
   },
   "hooks": {
     "Notification": [

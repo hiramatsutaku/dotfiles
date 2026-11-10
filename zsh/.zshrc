@@ -195,6 +195,23 @@ _claude_profile_names() {
 compdef _claude_profile_names claude-profile
 compdef _claude_profile_names claude-profile-create
 
+# 1Password を Service Account 経由で使う op（Claude Code 用）
+# Service Account の権限は個人アカウントの claude-code Vault の read_items だけなので、
+# Claude から見えるのはこの Vault に入れたアイテムに限られる。
+# トークンは Keychain（サービス名 OP_SERVICE_ACCOUNT_TOKEN）から呼ぶたびに渡す。
+# 常時 export すると、素の op でも個人や仕事の Vault が見えなくなるため。
+# Claude 側では素の op と security find-generic-password を deny にしている（docs/decisions/009）
+opsa() {
+  # 呼び出し元で set -x されていてもトークンがトレースに出ないよう、関数の中だけ xtrace を切る
+  setopt localoptions noxtrace
+  local token
+  token="$(/usr/bin/security find-generic-password -s OP_SERVICE_ACCOUNT_TOKEN -w 2>/dev/null)" || {
+    print -u2 "opsa: Keychain に OP_SERVICE_ACCOUNT_TOKEN がありません（docs/decisions/009 の手順で作る）"
+    return 1
+  }
+  OP_SERVICE_ACCOUNT_TOKEN="$token" command op "$@"
+}
+
 # ローカルの設定を読み込む
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
